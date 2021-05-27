@@ -1,0 +1,25 @@
+version: "3.9"  
+services:
+  api:
+    container_name: crud_api
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+        - .:/home/crud-nest
+        -  /home/crud-nest/node_modules  
+      
+  database:
+    image: postgres
+    container_name:  crud_api_db
+    environment:
+        POSTGRES_DB: " crud_api-nest"
+        POSTGRES_USER: "postgres"
+        POSTGRES_PASSWORD: "root"
+    ports:
+      - "5432:5432"
+  adminer:
+    image: adminer:latest
+    restart: always
+    ports:
+      - 8080:8080
